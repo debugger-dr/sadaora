@@ -11,7 +11,7 @@ A lightweight version of a "Member Profiles + Feed" app built with React, Node.j
 
 ### 1. Clone the Repository:
 ```bash
-git clone <repository-url>
+git clone https://github.com/debugger-dr/sadaora
 cd sadaora-app
 ```
 
