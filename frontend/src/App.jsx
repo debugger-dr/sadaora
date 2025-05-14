@@ -25,7 +25,8 @@ function App() {
     navigate('/login');
   };
 
-  const handleLogin = () => {
+  const handleLogin = (token) => {
+    localStorage.setItem('token', token);
     setIsLoggedIn(true);
     navigate('/');
   };
@@ -33,9 +34,8 @@ function App() {
   return (
     <div>
       {isLoggedIn && <Navbar handleLogout={handleLogout} />}
-      
       <Routes>
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/signup" element={<Signup onLogin={handleLogin} />} />
         <Route path="/login" element={<Login onLogin={handleLogin} />} />
         <Route path="/profile" element={isLoggedIn ? <Dashboard /> : <Login onLogin={handleLogin} />} />
         <Route path="/" element={isLoggedIn ? <Feed /> : <Login onLogin={handleLogin} />} />

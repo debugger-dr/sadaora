@@ -7,11 +7,15 @@ export default function Feed() {
   const [profiles, setProfiles] = useState([]);
   const [error, setError] = useState('');
   const [page, setPage] = useState(1);
+  const [isLastPage, setIsLastPage] = useState(false);
 
   const fetchProfiles = async (page) => {
     try {
-      const response = await api.get(`/profile/feed?page=${page}&limit=10`);
-      setProfiles(response.data);
+    const response = await api.get(`/profile/feed?page=${page}&limit=10`);
+    setProfiles(response.data);
+
+    
+      setIsLastPage(response.data.length < 10);
     } catch (err) {
       setError('Failed to load profiles.');
       console.error('Error fetching profiles:', err);
@@ -22,13 +26,17 @@ export default function Feed() {
     fetchProfiles(page);
   }, [page]);
 
-  const handleNextPage = () => setPage((prev) => prev + 1);
-  const handlePrevPage = () => setPage((prev) => Math.max(prev - 1, 1));
-
+  const handleNextPage = () => {
+    document.body.scrollIntoView({ behavior: 'smooth' });
+    setPage((prev) => prev + 1);
+  }
+  const handlePrevPage = () => {
+    document.body.scrollIntoView({ behavior: 'smooth' });
+    setPage((prev) => Math.max(prev - 1, 1));
+  }
   return (
     <div className="feed-container">
       <h2>Public Feed</h2>
-      <Link to="/profile" className="back-btn">Back to Profile</Link>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       
       <div className="profile-cards">
@@ -54,8 +62,8 @@ export default function Feed() {
       </div>
 
       <div className="pagination">
-        <button onClick={handlePrevPage} disabled={page <= 1}>Previous</button>
-        <button onClick={handleNextPage}>Next</button>
+        <button onClick={handlePrevPage} disabled={page <= 1} >Previous</button>
+        <button onClick={handleNextPage} disabled={isLastPage} style={{ marginTop: '20px' }}>Next</button>
       </div>
     </div>
   );

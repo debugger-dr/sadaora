@@ -14,6 +14,10 @@ A lightweight version of a "Member Profiles + Feed" app built with React, Node.j
 git clone https://github.com/debugger-dr/sadaora
 cd sadaora-app
 ```
+# Install dependencies:
+```bash
+npm install
+```
 
 ### 2. Backend Setup (Node.js + Express):
 
@@ -41,11 +45,6 @@ npx prisma migrate dev --name init
 npx prisma generate
 ```
 
-# Start the backend server:
-```bash
-npm run dev
-```
-
 # The backend should be running at http://localhost:3000.
 
 ### 3. Frontend Setup (React):
@@ -60,7 +59,8 @@ cd frontend
 npm install
 ```
 
-# Start the frontend server:
+### Start the app:
+# Navigate to the frontend directory:
 ```bash
 npm run dev
 ```

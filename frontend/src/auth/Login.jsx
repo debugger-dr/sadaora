@@ -18,9 +18,11 @@ export default function Login({ onLogin }) {
 
     try {
       const res = await api.post('/auth/login', form);
-      localStorage.setItem('token', res.data.token);
+      const token = res.data.token;
+      localStorage.setItem('token', token);
+
       if (onLogin) {
-        onLogin();
+        onLogin(token);
       } else {
         navigate('/');
       }
